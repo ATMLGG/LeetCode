@@ -14,8 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        maxProfit([4,4,6,1,1,4,2,5])
-        
+         maxProfit([3,3,5,0,0,3,1,4])
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,12 +86,6 @@ class ViewController: UIViewController {
         }
         
         return maxPrice
-        
-#endif
-        
-#if false      //第三题
-        
-        
         
 #endif
         
