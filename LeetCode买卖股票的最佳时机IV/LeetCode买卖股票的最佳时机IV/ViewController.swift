@@ -10,12 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    class Section {
+    struct Section {
         
         var start: Int
         var end: Int
         var hasProfit: Bool
         
+        init() {
+            self.start = 0
+            self.end = 0
+            self.hasProfit = false
+        }
         
         init(start: Int, end: Int, hasProfit: Bool) {
             
@@ -54,28 +59,24 @@ class ViewController: UIViewController {
         
         for _ in 0..<k {
             
-            
             var maxProfit = 0
             var tmpProfit = 0
             
-            var maxSectionStart = 0
-            var maxSectionEnd = 0
-            
             var maxIndex = -1
             
+            var tmpSection = Section.init()
+            var maxSection = Section.init()
+            
             for index in 0..<subRange.count {
-                
-                var tmpReceive: (profit: Int, startIndex: Int, endIndex: Int)
-           
+
                 
                 if subRange[index].hasProfit {
-                    tmpReceive = findMin(prices, subRange[index].start, subRange[index].end)
-                    tmpProfit = -tmpReceive.profit
+                    
+                    tmpProfit = -findMin(prices, subRange[index].start, subRange[index].end, &tmpSection)
                     
                 } else {
                     
-                    tmpReceive = findMax(prices, subRange[index].start, subRange[index].end)
-                    tmpProfit = tmpReceive.profit
+                    tmpProfit = findMax(prices, subRange[index].start, subRange[index].end, &tmpSection)
                 }
                 
                 
@@ -84,8 +85,7 @@ class ViewController: UIViewController {
                     maxProfit = tmpProfit
                     maxIndex = index
 
-                    maxSectionStart = tmpReceive.startIndex
-                    maxSectionEnd = tmpReceive.endIndex
+                    maxSection = tmpSection
 
                 }
             }
@@ -97,27 +97,22 @@ class ViewController: UIViewController {
                 
                 let tmp = subRange[maxIndex]
                 
-            
                 if tmp.hasProfit {
                     
-                    subRange.append(Section.init(start: tmp.start, end: maxSectionStart, hasProfit: true))
-                    subRange.append(Section.init(start: maxSectionEnd, end: tmp.end, hasProfit: true))
+                    subRange.append(Section.init(start: tmp.start, end:maxSection.start, hasProfit: true))
+                    subRange.append(Section.init(start: maxSection.end, end: tmp.end, hasProfit: true))
                     
-                    tmp.start = maxSectionStart + 1
-                    tmp.end = maxSectionEnd - 1
-                    tmp.hasProfit = false
-//                    subRange[maxIndex] = tmp
+                    maxSection.start +=  1
+                    maxSection.end -= 1
+                    subRange[maxIndex] = maxSection
                     
                 } else {
                     
                     
-                    subRange.append(Section.init(start: tmp.start, end: maxSectionStart - 1, hasProfit: false))
-                    subRange.append(Section.init(start: maxSectionEnd + 1, end: tmp.end, hasProfit: false))
-                    
-                    tmp.start = maxSectionStart
-                    tmp.end = maxSectionEnd
-                    tmp.hasProfit = true
-//                    subRange[maxIndex] = tmp
+                    subRange.append(Section.init(start: tmp.start, end: maxSection.start - 1, hasProfit: false))
+                    subRange.append(Section.init(start: maxSection.end + 1, end: tmp.end, hasProfit: false))
+
+                    subRange[maxIndex] = maxSection
                     
                 }
                 
@@ -130,14 +125,13 @@ class ViewController: UIViewController {
         return totalProfit
     }
     
-    func findMax(_ prices: [Int], _ startFlag: Int, _ endFlag: Int) -> (profit: Int, startIndex: Int, endIndex: Int) {
+    func findMax(_ prices: [Int], _ startFlag: Int, _ endFlag: Int, _ section: inout Section) -> Int {
         
         if startFlag >= endFlag {
-            return (0, 0, 0)
+            return 0
         }
-        
-        var startIndex = 0
-        var endIndex = 0
+
+        section.hasProfit = true
         
         var tmpProfit = 0;
         var tmpStartIndex = startFlag;
@@ -156,23 +150,23 @@ class ViewController: UIViewController {
                 
                 if total > tmpProfit {
                     tmpProfit = total
-                    endIndex = i
-                    startIndex = tmpStartIndex
+                    section.end = i
+                    section.start = tmpStartIndex
                 }
             }
         }
         
-        return (tmpProfit, startIndex, endIndex)
+        return tmpProfit
     }
     
-    func findMin(_ prices: [Int], _ startFlag: Int, _ endFlag: Int) -> (profit: Int, startIndex: Int, endIndex: Int) {
+    func findMin(_ prices: [Int], _ startFlag: Int, _ endFlag: Int, _ section: inout Section) -> Int {
         
         if startFlag >= endFlag {
-            return (0, 0, 0)
+            return 0
         }
         
-        var startIndex = 0
-        var endIndex = 0
+        
+        section.hasProfit = false
         
         var tmpLoss = 0;
         var tmpStartIndex = startFlag;
@@ -191,13 +185,13 @@ class ViewController: UIViewController {
                 
                 if total < tmpLoss {
                     tmpLoss = total
-                    endIndex = i
-                    startIndex = tmpStartIndex
+                    section.end = i
+                    section.start = tmpStartIndex
                 }
             }
         }
         
-        return (tmpLoss, startIndex, endIndex)
+        return tmpLoss
     }
     
     

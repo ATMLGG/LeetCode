@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
-            timestampString = "554008909.470649"
+            timestampString = "554020288.886073"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "maxProfit(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
-            timestampString = "554008909.471203"
+            timestampString = "554020288.886601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "maxProfit(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
-            timestampString = "554008909.4714119"
+            timestampString = "554020288.886851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "maxProfit(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
-            timestampString = "554008909.471652"
+            timestampString = "554020288.887076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
@@ -70,31 +70,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
-            timestampString = "554008909.471853"
+            timestampString = "554020288.887298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "maxProfit(_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
-            timestampString = "554008909.4720809"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "maxProfit(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
-            timestampString = "554008909.472298"
+            timestampString = "554020288.887518"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "maxProfit(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +106,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
-            timestampString = "554008909.472538"
+            timestampString = "554020288.887728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "findMin(_:_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
+            timestampString = "554020288.887931"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "maxProfit(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
+            timestampString = "554020288.888131"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "findMax(_:_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeetCode&#x4e70;&#x5356;&#x80a1;&#x7968;&#x7684;&#x6700;&#x4f73;&#x65f6;&#x673a;IV/ViewController.swift"
+            timestampString = "554020288.888335"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "maxProfit(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
