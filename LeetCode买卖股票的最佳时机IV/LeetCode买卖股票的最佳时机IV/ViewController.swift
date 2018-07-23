@@ -10,10 +10,27 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    class Section {
+        
+        var start: Int
+        var end: Int
+        var hasProfit: Bool
+        
+        
+        init(start: Int, end: Int, hasProfit: Bool) {
+            
+            self.start = start
+            self.end = end
+            self.hasProfit = hasProfit
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        maxProfit([3,3,5,0,0,3,1,4])
+        
+        maxProfit(2, [3,3,5,0,0,3,1,4])
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,49 +38,97 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func maxProfit(_ prices: [Int]) -> Int {
+    
+    func maxProfit(_ k: Int, _ prices: [Int]) -> Int {
         
         if prices.count < 2 {
             return 0
         }
         
-        //计算单次获利最大区间
-        let receive = findMax(prices, 0, prices.count-1)
+        var totalProfit = 0
         
-        //获利金额
-        let profitFirst = receive.profit;
+
+        var subRange:[Section] = []
         
-        //区间起始位置,将数组分成三部分,分别求第二次获利金额
-        let startIndex = receive.startIndex;
-        let endIndex = receive.endIndex;
+        subRange.append(Section.init(start: 0, end: prices.count-1, hasProfit: false))
         
-        var subRange:[(start:Int, end:Int, isMid:Bool)] = []
-        subRange.append((0, startIndex - 1, false));
-        subRange.append((startIndex, endIndex, true));
-        subRange.append((endIndex + 1, prices.count - 1, false));
-        
-        var profitSecond = 0
-        
-        for range in subRange {
+        for _ in 0..<k {
             
+            
+            var maxProfit = 0
             var tmpProfit = 0
-            if range.isMid {
+            
+            var maxSectionStart = 0
+            var maxSectionEnd = 0
+            
+            var maxIndex = -1
+            
+            for index in 0..<subRange.count {
                 
-                //如果在第一次获利区间内,找到亏损最大的连续区间,加上这部分损失的钱,就是分两次交易后盈利的最大金额
-                tmpProfit = -findMin(prices, range.start, range.end).profit
+                var tmpReceive: (profit: Int, startIndex: Int, endIndex: Int)
+           
+                
+                if subRange[index].hasProfit {
+                    tmpReceive = findMin(prices, subRange[index].start, subRange[index].end)
+                    tmpProfit = -tmpReceive.profit
+                    
+                } else {
+                    
+                    tmpReceive = findMax(prices, subRange[index].start, subRange[index].end)
+                    tmpProfit = tmpReceive.profit
+                }
+                
+                
+                if maxProfit < tmpProfit {
+                    
+                    maxProfit = tmpProfit
+                    maxIndex = index
+
+                    maxSectionStart = tmpReceive.startIndex
+                    maxSectionEnd = tmpReceive.endIndex
+
+                }
+            }
+
+            if maxIndex < 0 {
+                
+                break
             } else {
                 
-                tmpProfit = findMax(prices, range.start, range.end).profit
+                let tmp = subRange[maxIndex]
+                
+            
+                if tmp.hasProfit {
+                    
+                    subRange.append(Section.init(start: tmp.start, end: maxSectionStart, hasProfit: true))
+                    subRange.append(Section.init(start: maxSectionEnd, end: tmp.end, hasProfit: true))
+                    
+                    tmp.start = maxSectionStart + 1
+                    tmp.end = maxSectionEnd - 1
+                    tmp.hasProfit = false
+//                    subRange[maxIndex] = tmp
+                    
+                } else {
+                    
+                    
+                    subRange.append(Section.init(start: tmp.start, end: maxSectionStart - 1, hasProfit: false))
+                    subRange.append(Section.init(start: maxSectionEnd + 1, end: tmp.end, hasProfit: false))
+                    
+                    tmp.start = maxSectionStart
+                    tmp.end = maxSectionEnd
+                    tmp.hasProfit = true
+//                    subRange[maxIndex] = tmp
+                    
+                }
+                
+                totalProfit += maxProfit
+                
             }
             
-            profitSecond = max(profitSecond, tmpProfit)
         }
         
-        
-        
-        return profitFirst + profitSecond
+        return totalProfit
     }
-    
     
     func findMax(_ prices: [Int], _ startFlag: Int, _ endFlag: Int) -> (profit: Int, startIndex: Int, endIndex: Int) {
         
@@ -96,7 +161,7 @@ class ViewController: UIViewController {
                 }
             }
         }
-
+        
         return (tmpProfit, startIndex, endIndex)
     }
     
@@ -134,6 +199,7 @@ class ViewController: UIViewController {
         
         return (tmpLoss, startIndex, endIndex)
     }
+    
     
     
     
