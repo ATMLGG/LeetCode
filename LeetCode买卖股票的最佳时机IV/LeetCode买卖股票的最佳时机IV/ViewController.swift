@@ -64,6 +64,7 @@ class ViewController: UIViewController {
             
             var maxIndex = -1
             
+
             var tmpSection = Section.init()
             var maxSection = Section.init()
             
