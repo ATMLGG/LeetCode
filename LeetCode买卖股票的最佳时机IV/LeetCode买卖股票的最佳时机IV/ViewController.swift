@@ -15,6 +15,10 @@ class ViewController: UIViewController {
         var start: Int
         var end: Int
         var hasProfit: Bool
+        var countedProfit: Int?
+        var countedStart: Int?
+        var countedEnd: Int?
+        var countedHasProfit: Bool?
         
         init() {
             self.start = 0
@@ -35,7 +39,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        maxProfit(2, [3,3,5,0,0,3,1,4])
+        print(maxProfit(11, [48,12,60,93,97,42,25,64,17,56,85,93,9,48,52,42,58,85,81,84,69,36,1,54,23,15,72,15,11,94]))
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +48,8 @@ class ViewController: UIViewController {
     }
 
     
+    //优化思路:由于需要计算每个区间的盈利,便利过程中会有大量重复计算
+    //记录每个区间的盈利数额和子区间,若果计算过就直接获取,避免重复计算
     func maxProfit(_ k: Int, _ prices: [Int]) -> Int {
         
         if prices.count < 2 {
@@ -64,30 +70,43 @@ class ViewController: UIViewController {
             
             var maxIndex = -1
             
-
-            var tmpSection = Section.init()
             var maxSection = Section.init()
             
             for index in 0..<subRange.count {
-
                 
-                if subRange[index].hasProfit {
+                var tmpSection = Section.init()
+                
+                if let countedProfit = subRange[index].countedProfit {
+
+                    tmpProfit = countedProfit
                     
-                    tmpProfit = -findMin(prices, subRange[index].start, subRange[index].end, &tmpSection)
+                    tmpSection.start = subRange[index].countedStart!
+                    tmpSection.end = subRange[index].countedEnd!
+                    tmpSection.hasProfit = subRange[index].countedHasProfit!
                     
                 } else {
+                    if subRange[index].hasProfit {
+                        
+                        tmpProfit = -findMin(prices, subRange[index].start, subRange[index].end, &tmpSection)
+
+                    } else {
+                        
+                        tmpProfit = findMax(prices, subRange[index].start, subRange[index].end, &tmpSection)
+                    }
                     
-                    tmpProfit = findMax(prices, subRange[index].start, subRange[index].end, &tmpSection)
+                    
+                    subRange[index].countedProfit = tmpProfit
+                    subRange[index].countedStart = tmpSection.start
+                    subRange[index].countedEnd = tmpSection.end
+                    subRange[index].countedHasProfit = tmpSection.hasProfit
                 }
-                
-                
+            
                 if maxProfit < tmpProfit {
                     
                     maxProfit = tmpProfit
                     maxIndex = index
 
                     maxSection = tmpSection
-
                 }
             }
 
@@ -98,21 +117,41 @@ class ViewController: UIViewController {
                 
                 let tmp = subRange[maxIndex]
                 
+                
+                maxSection.countedProfit = nil
+                maxSection.countedStart = nil
+                maxSection.countedEnd = nil
+                
                 if tmp.hasProfit {
                     
-                    subRange.append(Section.init(start: tmp.start, end:maxSection.start, hasProfit: true))
-                    subRange.append(Section.init(start: maxSection.end, end: tmp.end, hasProfit: true))
+                    if maxSection.start > tmp.start {
+                        subRange.append(Section.init(start: tmp.start, end:maxSection.start, hasProfit: true))
+                    }
                     
-                    maxSection.start +=  1
+                    if maxSection.end < tmp.end {
+                        subRange.append(Section.init(start: maxSection.end, end: tmp.end, hasProfit: true))
+                    }
+
+                    maxSection.start += 1
                     maxSection.end -= 1
-                    subRange[maxIndex] = maxSection
+                    
+                    if maxSection.start < maxSection.end {
+                        subRange[maxIndex] = maxSection
+                    } else {
+                        subRange.remove(at: maxIndex)
+                    }
+                    
                     
                 } else {
                     
+                    if tmp.start < maxSection.start - 1 {
+                        subRange.append(Section.init(start: tmp.start, end: maxSection.start - 1, hasProfit: false))
+                    }
                     
-                    subRange.append(Section.init(start: tmp.start, end: maxSection.start - 1, hasProfit: false))
-                    subRange.append(Section.init(start: maxSection.end + 1, end: tmp.end, hasProfit: false))
-
+                    if maxSection.end + 1 < tmp.end {
+                        subRange.append(Section.init(start: maxSection.end + 1, end: tmp.end, hasProfit: false))
+                    }
+                    
                     subRange[maxIndex] = maxSection
                     
                 }
